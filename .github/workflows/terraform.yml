@@ -34,8 +34,12 @@ jobs:
       - name: Terraform Plan
         working-directory: terraform
         run: terraform plan
+        env:
+          TF_VAR_webui_admin_password: ${{ secrets.WEBUI_ADMIN_PASSWORD }}
 
       - name: Terraform Apply
         if: github.ref == 'refs/heads/main'
         working-directory: terraform
         run: terraform apply -auto-approve
+        env:
+          TF_VAR_webui_admin_password: ${{ secrets.WEBUI_ADMIN_PASSWORD }}
