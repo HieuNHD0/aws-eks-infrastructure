@@ -8,7 +8,7 @@ data "aws_eks_cluster_auth" "this" {
   name = module.eks.cluster_name
 }
 
-resource "kubernetes_namespace" "openwebui" {
+resource "kubernetes_namespace_v1" "openwebui" {
   metadata {
     name = "openwebui"
   }
@@ -17,7 +17,7 @@ resource "kubernetes_namespace" "openwebui" {
 resource "kubernetes_secret" "webui_auth" {
   metadata {
     name      = "webui-auth"
-    namespace = kubernetes_namespace.openwebui.metadata[0].name
+    namespace = kubernetes_namespace_v1.openwebui.metadata[0].name
   }
 
   type = "Opaque"
